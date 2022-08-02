@@ -10,4 +10,9 @@ class User < ApplicationRecord
 
   has_many :photos, dependent: :delete_all
   has_many :comments, dependent: :delete_all
+
+  has_many :friendships
+  has_many :accepted_friendships, -> { accepted }, class_name: 'Friendship'
+  has_many :friends, through: :accepted_friendships
+
 end
