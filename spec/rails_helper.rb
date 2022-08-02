@@ -65,5 +65,8 @@ RSpec.configure do |config|
   # Configure FactoryBot methods
   config.include FactoryBot::Syntax::Methods
   # Configure Devise methods to testing
-  config.include RequestSpecHelper, type: :request
+  # config.include RequestSpecHelper, type: :request
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
 end
