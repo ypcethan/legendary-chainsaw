@@ -11,7 +11,9 @@
       <p >
       <%= link_to user.username, profile_path(user.username) %>
       </p>
-      <%= button_to "Connect" %>
+      <% unless current_user.friend_requested?(user) %>
+        <%= button_to "Connect", friendships_path, params: { friend_id: user.id} %>
+      <% end%>
     </div>
   <% end %>
 </div>

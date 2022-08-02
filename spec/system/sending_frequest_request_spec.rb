@@ -16,8 +16,11 @@ RSpec.describe "Sending friend request" do
       user_two = create(:user)
       visit profiles_path
       within "#user-#{user_two.id}" do
-        expect(page).to have_selector(:link_or_button, 'Connect')
+        click_button 'Connect'
       end
+
+      expect(user.friendships.unaccepted.map(&:user_id)).to include user.id
+      expect(user.friendships.unaccepted.map(&:friend_id)).to include user_two.id
     end
   end
 end

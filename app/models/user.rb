@@ -15,4 +15,7 @@ class User < ApplicationRecord
   has_many :accepted_friendships, -> { accepted }, class_name: 'Friendship'
   has_many :friends, through: :accepted_friendships
 
+  def friend_requested?(user)
+    false
+  end
 end
