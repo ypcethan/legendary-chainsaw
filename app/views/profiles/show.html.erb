@@ -9,15 +9,25 @@
 
   <div>
     <p>Friend requests</p>
-    <% @user.friendship_requests.each do |issuer| %>
-      <div id="request-user-<%= issuer.id %>" class='row'>
-        <p>
-          <%= issuer.username %>
-        </p>
-        <% path = ERB::Util.url_encode(issuer.username) %>
-        <%= button_to 'Accept', friends_path, params: { user_id: issuer.id } %>
-        <%= button_to 'Reject', friend_path(issuer),  method: :delete %>
-      </div>
+    <% if current_user == @user %>
+      <% @user.friendship_requests.each do |issuer| %>
+        <div id="request-user-<%= issuer.id %>" class='row'>
+          <p>
+            <%= issuer.username %>
+          </p>
+          <% path = ERB::Util.url_encode(issuer.username) %>
+          <%= button_to 'Accept', friends_path, params: { user_id: issuer.id } %>
+          <%= button_to 'Reject', friend_path(issuer),  method: :delete %>
+        </div>
+      <% end %>
+    <% else %>
+      <% @user.friends.each do |friend| %>
+        <div  class='row'>
+          <p>
+            <%= friend.username %>
+          </p>
+        </div>
+      <% end %>
 
     <% end %>
   </div>
