@@ -13,6 +13,8 @@
       </p>
       <% unless current_user.friend_requested?(user) %>
         <%= button_to "Connect", friendships_path, params: { friend_id: user.id} %>
+      <% else %>
+           Request pending
       <% end%>
     </div>
   <% end %>
