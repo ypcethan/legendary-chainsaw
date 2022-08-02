@@ -9,11 +9,14 @@
 
   <div>
     <p>Friend requests</p>
-    <% @user.friendship_requests.each do |person| %>
-      <div class='row'>
+    <% @user.friendship_requests.each do |issuer| %>
+      <div id="request-user-<%= issuer.id %>" class='row'>
         <p>
-          <%= person.username %>
+          <%= issuer.username %>
         </p>
+        <% path = ERB::Util.url_encode(issuer.username) %>
+        <%= button_to 'Accept', friends_path, params: { user_id: issuer.id } %>
+        <%= button_to 'Reject', friend_path(issuer),  method: :delete %>
       </div>
 
     <% end %>

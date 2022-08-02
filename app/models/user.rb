@@ -38,4 +38,10 @@ class User < ApplicationRecord
     inverse_friendships.find_by(user_id: user.id).update(accepted_at: Time.now)
     friendships.create(friend_id: user.id, accepted_at: Time.now)
   end
+
+  def reject_request(user)
+    return unless user.friend_requested?(self)
+
+    inverse_friendships.find_by(user_id: user.id).destroy
+  end
 end

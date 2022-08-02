@@ -5,4 +5,8 @@ class FriendshipsController < ApplicationController
 
     redirect_to profiles_path
   end
+
+  def destroy
+    byebug
+  end
 end

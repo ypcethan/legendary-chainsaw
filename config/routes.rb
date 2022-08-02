@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'profiles/:username', to: 'profiles#show', as: :profile
 
   resources :friendships, only: [:create]
+  resources :friends, only: [:create, :destroy]
 
   resources :photos, only: [:index, :show, :new, :create, :destroy]
 
