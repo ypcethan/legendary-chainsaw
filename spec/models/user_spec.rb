@@ -21,4 +21,22 @@ RSpec.describe User, type: :model do
       expect(user1.friend_requested?(user2)).to be_truthy
     end
   end
+
+  describe '#send_frend_request' do
+    context 'when no friendship record exist' do
+      it 'creates a new record' do
+        user1.send_frend_request(user2)
+        expect(user1.friend_requested?(user2)).to be_truthy
+      end
+    end
+
+    context 'when the friendship record already exist' do
+      it 'does not create a new one' do
+        user1.send_frend_request(user2)
+        expect {
+          user1.send_frend_request(user2)
+        }.to change{ user1.friendships.count }.by(0)
+      end
+    end
+  end
 end
