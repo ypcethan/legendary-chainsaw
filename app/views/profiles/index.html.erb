@@ -7,8 +7,11 @@
   <%end %>
 
   <% @users.each do |user| %>
-    <p>
+    <div id="user-<%= user.id %>" class='row'>
+      <p >
       <%= link_to user.username, profile_path(user.username) %>
-    </p>
+      </p>
+      <%= button_to "Connect" %>
+    </div>
   <% end %>
 </div>
