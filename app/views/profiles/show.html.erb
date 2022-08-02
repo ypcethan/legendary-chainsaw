@@ -7,6 +7,17 @@
     <% end %>
   </p>
 
+  <div>
+    <p>Friend requests</p>
+    <% @user.friendship_requests.each do |person| %>
+      <div class='row'>
+        <p>
+          <%= person.username %>
+        </p>
+      </div>
+
+    <% end %>
+  </div>
   <% if @user.photos.empty? %>
     <p>There is still no photos to display.</p>
   <% else %>

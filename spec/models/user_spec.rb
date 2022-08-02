@@ -39,4 +39,33 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#accept_request' do
+    it 'creates mutual friendship' do
+      user2.send_frend_request(user1)
+      user1.accept_request(user2)
+
+      expect(user1.friends.map(&:id)).to include(user2.id)
+    end
+  end
+
+  describe '#friendship_requests' do
+
+    it do
+      user2.send_frend_request(user1)
+      user3.send_frend_request(user1)
+      expect(user1.friendship_requests.map(&:id)).to include(user2.id, user3.id)
+    end
+
+    it  do
+      user2.send_frend_request(user1)
+      user3.send_frend_request(user1)
+
+      user1.accept_request(user2)
+
+      ids = user1.friendship_requests.map(&:id)
+      expect(ids).to include(user3.id)
+      expect(ids).to_not include(user2.id)
+    end
+  end
 end
