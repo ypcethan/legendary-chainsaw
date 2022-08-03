@@ -12,10 +12,10 @@
       <%= link_to user.username, profile_path(user.username) %>
       </p>
       <% if current_user != user %>
-        <% unless current_user.friend_requested?(user) %>
-          <%= button_to "Connect", friendships_path, params: { friend_id: user.id} %>
+        <% if current_user.friend_requested?(user) %>
+           Request pending
         <% else %>
-             Request pending
+          <%= button_to "Connect", friendships_path, params: { friend_id: user.id} %>
         <% end %>
       <% end %>
     </div>
